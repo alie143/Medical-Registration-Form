@@ -1,244 +1,173 @@
 import { useLocation, useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { useState , useEffect} from "react";
+import { Form, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import React from "react";
 
 
-const Body = () => {
-  const navigate = useNavigate()
-  const [title, setTitle] = useState("Mr")
-  const [firstName, setFirstName] = useState('firstName')
-  const [lastName, setLastName] = useState('lastName')
-  const [email, setEmail] = useState('email')
-  const [mobileNo, setMobileNo] = useState("")
-  const [dateOfBirth, setDateOfBirth] = useState("")
-  const [covidVaccinated, setCovidVaccinated] = useState(1)
+const Body2 = () => {
+    const navigate = useNavigate()
+    const [title, setTitle] = useState("Mr")
+    const [firstName, setFirstName] = useState('firstName')
+    const [lastName, setLastName] = useState('lastName')
+    const [email, setEmail] = useState('email')
+    const [mobileNo, setMobileNo] = useState("")
+    const [dateOfBirth, setDateOfBirth] = useState("")
+    const [covidVaccinated, setCovidVaccinated] = useState(1)
 
-  const Continue = () => {
-     console.log("Function called!");
-  }
+    const Continue = () => {
+        console.log("Function called!");
+    }
 
-  return (
-    <div style={{ backgroundColor: '#E5E4F4' }} >
-      <div className="col mt-4 d-flex justify-content-center">
-        <h1 className="title">Medical History Form</h1>
-        <br /><br /><br /><br />
-      </div>
-      <div className="row">
-        <div style={{ width: '250px' }}>
-          <div className="form fw-bold">
-            <div style={{ marginLeft: '140px', width: '100px', height: '545px', }}>
-              <label htmlFor="" className="label-control">
-                Title
-              </label>
-              <select
-                className="form-select form-control"
-                id="inputGroupSelect02"
-                placeholder="title"
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-              >
-                <option value="Select">Select</option>
-                <option value="Mr.">Mr</option>
-                <option value="Mrs.">Mrs</option>
-                <option value="Miss.">Miss</option>
-              </select>
+    return (
+        <>
+            <br/>
+            <div className="col mt-0 d-flex justify-content-center">
+                <h1 className="title"><u>Medical Insurance Registration Form</u></h1>
+                <br /><br /><br/>
             </div>
-          </div>
-        </div>
-        <div className="col" >
-          <div className="form fw-bold" style={{ marginLeft: '20px', width: '350px' }}>
-            <div className="mb-3" >
-              <label htmlFor="" className="label-control">
-                First Name
-              </label>
-              <input value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-                type="text"
-                className="form-control"
-              />
+            <div style={{ backgroundColor: 'lightyellow', boxShadow:'1px 2px 9px #C4C3C3', border: "light", marginLeft: '200px', marginRight: '200px' }}>
+                <br />
+                <form class="row g-3" style={{ marginLeft: '80px', marginRight: '80px' }}>
+                    <div class="col-md-6">
+                        <label for="inputFirstName" class="form-label">First Name</label>
+                        <input type="text" onChange={(e) => {
+                            setFirstName(e.target.value);
+                        }} class="form-control" id="inputFirstName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputLastname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="inputLastname" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputContact" class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" id="inputContact" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputDOB" class="form-label">Date Of Birth</label>
+                        <input type="date" class="form-control" id="inputDOB" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputGender" class="form-label">Gender</label>
+                        <select id="inputGender" class="form-select">
+                            <option selected>Select...</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Transgender</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputMarital" class="form-label">Marital Status</label>
+                        <select id="inputMarital" class="form-select">
+                            <option selected>Select...</option>
+                            <option>Single</option>
+                            <option>Married</option>
+                            <option>Divorced</option>
+                            <option>Widow</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputIdentity" class="form-label">Identity</label>
+                        <select id="inputIdentity" class="form-select">
+                            <option selected>Select...</option>
+                            <option>Aadhaar</option>
+                            <option>PAN Card</option>
+                            <option>Voter ID</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputData" class="form-label">Identity Number</label>
+                        <input type="text" class="form-control" id="inputData" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputNominee" class="form-label">Nominee Name</label>
+                        <input type="text" class="form-control" id="inputNominee" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputRelation" class="form-label">Nominee Relation</label>
+                        <select id="inputRelation" class="form-select">
+                            <option selected>Select...</option>
+                            <option>Father</option>
+                            <option>Mother</option>
+                            <option>Spouse</option>
+                            <option>Sibling</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="inputCity" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">State</label>
+                        <select id="inputState" class="form-select">
+                            <option selected>Select...</option>
+                            <option>Andhra Pradesh</option>
+                            <option>Andaman and Nicobar Islands</option>
+                            <option>Arunachal Pradesh</option>
+                            <option>Assam</option>
+                            <option>Bihar</option>
+                            <option>Chandigarh</option>
+                            <option>Chhattisgarh</option>
+                            <option>Dadar and Nagar Haveli</option>
+                            <option>Daman and Diu</option>
+                            <option>Delhi</option>
+                            <option>Lakshadweep</option>
+                            <option>Puducherry</option>
+                            <option>Goa</option>
+                            <option>Gujarat</option>
+                            <option>Haryana</option>
+                            <option>Himachal Pradesh</option>
+                            <option>Jammu and Kashmir</option>
+                            <option>Jharkhand</option>
+                            <option>Karnataka</option>
+                            <option>Kerala</option>
+                            <option>Madhya Pradesh</option>
+                            <option>Maharashtra</option>
+                            <option>Manipur</option>
+                            <option>Meghalaya</option>
+                            <option>Mizoram</option>
+                            <option>Nagaland</option>
+                            <option>Odisha</option>
+                            <option>Punjab</option>
+                            <option>Rajasthan</option>
+                            <option>Sikkim</option>
+                            <option>Tamil Nadu</option>
+                            <option>Telangana</option>
+                            <option>Tripura</option>
+                            <option>Uttar Pradesh</option>
+                            <option>Uttarakhand</option>
+                            <option>West Bengal</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Pincode</label>
+                        <input type="text" class="form-control" id="inputZip" />
+                    </div>
+                    <div class="col-12">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+                <br />
             </div>
-
-            <div className="mb-3">
-              <label htmlFor="" className="label-control">
-                Email Id
-              </label>
-              <input
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                type="email"
-                className="form-control"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="" className="label-control">
-                Date of Birth
-              </label>
-              <input
-                onChange={(e) => {
-                  setDateOfBirth(e.target.value);
-                }}
-                type="date"
-                className="form-control"
-              />
-            </div>
-            {/* new row */}
-            <div style={{ width: '350px' }}>
-              <div className="form fw-bold">
-                <div className="mb-3">
-                  <label htmlFor="" className="label-control">
-                    Disease
-                  </label>
-                  <select
-                    className="form-select form-control"
-                    id="inputGroupSelect02"
-                    placeholder="title"
-                    // onChange={(e) => {
-                    //   setTitle(e.target.value);
-                    // }}
-                  >
-                    <option value="Select">Select</option>
-                    <option value="Asthma">Asthma</option>
-                    <option value="Cancer">Cancer</option>
-                    <option value="Cardiac Disease">Cardiac Disease</option>
-                    <option value="Diabetes">Diabetes</option>
-                    <option value="Others">Others</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div style={{ width: '350px' }}>
-              <div className="form fw-bold">
-                <div className="mb-3">
-                  <label htmlFor="" className="label-control">
-                    Are you currently taking any medication ?
-                  </label>
-                  <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-              <label className="form-check-label" for="flexRadioDefault1">
-                Yes
-              </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-              <label className="form-check-label" for="flexRadioDefault2">
-                No
-              </label>
-            </div>  
-                </div>
-              </div>
-            </div>
-            
-
-            <div className="mb-3">
-              <button onClick={() => { navigate('/') }} className="btn btn-primary" style={{ backgroundColor: '#4A235A' }}>
-                Reset
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="col" style={{ marginRight: '250px' }}>
-          <div className="form fw-bold" style={{ width: '350px' }}>
-            <div className="mb-3">
-              <label htmlFor="" className="label-control">
-                Last Name
-              </label>
-              <input
-                value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-                type="text"
-                className="form-control"
-              />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="" className="label-control">
-                Contact No
-              </label>
-              <input maxlength="10"
-                onChange={(e) => {
-                  setMobileNo(e.target.value);
-                }}
-                type="phone"
-                className="form-control"
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="" className="label-control">
-                Covid Vaccinated Status
-              </label>
-              <select className="form-select form-control" id="inputGroupSelect02"
-                onChange={(e) => { setCovidVaccinated(e.target.value) }} >
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-              </select>
-
-            </div>
-            <div style={{ width: '350px' }}>
-              <div className="form fw-bold">
-                <div className="mb-3">
-                  <label htmlFor="" className="label-control">
-                    Symptoms currently experiencing
-                  </label>
-                  <select
-                    className="form-select form-control"
-                    id="inputGroupSelect02"
-                    placeholder="title"
-                    // onChange={(e) => {
-                    //   setTitle(e.target.value);
-                    // }}
-                  >
-                    <option value="Select">Select</option>
-                    <option value="Chest Pain">Chest Pain</option>
-                    <option value="Obesity">Obesity</option>
-                    <option value="Weight Loss">Weight Loss</option>
-                    <option value="Respiratory">Respiratory</option>
-                    <option value="Others">Others</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div style={{ width: '350px' }}>
-              <div className="form fw-bold">
-                <div className="mb-3">
-                  <label htmlFor="" className="label-control">
-                    Do you consume alcohol ?
-                  </label>
-                  <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-              <label className="form-check-label" for="flexRadioDefault1">
-                Yes
-              </label>
-            </div>
-            <div className="form-check">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked />
-              <label className="form-check-label" for="flexRadioDefault2">
-                No
-              </label>
-            </div>  
-                </div>
-              </div>
-            </div>
-              <div className="mb-3">
-              <button onClick={Continue} className="btn btn-primary" style={{ backgroundColor: '#4A235A' }}>
-                Continue
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+            <br />
+        </>
+    );
 };
-export default Body;
+
+export default Body2;

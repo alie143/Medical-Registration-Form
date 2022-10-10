@@ -38,7 +38,7 @@ const styles = {
     marginTop: "7px",
   },
   navbar: {
-    backgroundColor: "#4A235A",
+    backgroundColor: "darkblue",
     position: "top",
   },
 };
@@ -58,31 +58,31 @@ const Header = () => {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
               <a href="/" class="nav-item nav-link active" style={styles.title}>
-               <i>Medical Insurance</i>
+                <i>Medical Insurance</i>
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
-              Home
+                Home
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
-               About
+                About
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
                 Contact Us
               </a>
             </div>
             <div class="navbar-nav ms-auto">
-              <a href="/" style={styles.login} class="nav-item nav-link">
+              {/* <a href="/" style={styles.login} class="nav-item nav-link">
                 Login{" "}
-              </a>
+              </a> */}
               <label
                 style={{ color: "white", fontWeight: "bold", marginTop: "8px" }}
               >
-                |
+                {/* | */}
               </label>
-              <a href="/" style={styles.signup} class="nav-item nav-link">
+              {/* <a href="/" style={styles.signup} class="nav-item nav-link">
                 Signup
-              </a>
-              <a href="/">
+              </a> */}
+              <a href="/" style={{ marginRight: '10px' }}>
                 <img
                   src={require("../images/meity_logo.png")}
                   style={styles.userlogo}
