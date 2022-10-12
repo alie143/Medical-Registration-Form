@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router";
+import { json, useLocation, useNavigate } from "react-router";
 import { Form, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -27,43 +27,111 @@ const Body = () => {
     const [state, setState] = useState("")
     const [pincode, setPincode] = useState("")
 
-
-    const clicked = () => {
-
-        const url = `${URL}/backend path`
-
+    const clickFunc = () => {
+        alert("Inside Clicked")
         const nomineeInformation = {
             nomineeName,
             nomineeRelation,
             nomineeDOB,
         }
-        
-        const name = firstName+" "+lastName;
 
-        const body = {
-            name,
-            email,
-            contactNumber,
-            gender,
-            dateOfBirth,
-            identityType,
-            identityNumber,
-            maritalStatus,
-            address,
-            city,
-            state,
-            pincode,
-            nomineeInformation,
+        const name = firstName + " " + lastName;
+
+        const payload = {
+            "customers": {
+                // clientId : "",
+                name,
+                email,
+                contactNumber,
+                gender,
+                dateOfBirth,
+                identityType,
+                identityNumber,
+                maritalStatus,
+                address,
+                city,
+                state,
+                pincode,
+                "clinical_history": [
+                    "heartissue",
+                    "diebetic"
+                ],
+                "Date": "",
+                "bank_account": {
+                    "account_number": "32828742093",
+                    "IFSC": "SBIN0003264",
+                    "Bank_name": "State Bank Of India"
+                },
+                nomineeInformation,
+            }
         }
-        console.log('Body Content => ' + body);
-        axios.post(url, body).then((response) => {
-            console.log(response.data);
-        });
+
+        //   axios({
+        //     method: 'post',
+        //     url: `http://10.210.8.54:3002/api/clientregistration`,
+        //     data: payload, // you are sending body instead
+        //     headers: {
+        //      // 'Authorization': `bearer ${token}`,
+        //     'Content-Type': 'application/json'
+        //     }, 
+        //   })
+        axios
+            .post("http://10.210.8.54:3002/api/clientregistration", payload)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+                console.log(typeof response.data);
+            })
+            .catch(function (error) {
+                console.log("error");
+                console.log(error);
+            });
+        console.log("payload => " + JSON.stringify(payload));
     }
 
-    const Continue = () => {
-        console.log("Function called!");
-    }
+
+
+
+    // const clicked =async () => {
+
+    //     const url = `${URL}`
+
+    // const data = {
+    //     name,
+    //     email,
+    //     contactNumber,
+    //     gender,
+    //     dateOfBirth,
+    //     identityType,
+    //     identityNumber,
+    //     maritalStatus,
+    //     address,
+    //     city,
+    //     state,
+    //     pincode,
+    //     "clinical_history": [
+    //         "heartissue",
+    //         "diebetic"
+    //     ],
+    //     "Date": "",
+    //     "bank_account": {
+    //         "account_number": "32828742093",
+    //         "IFSC": "SBIN0003264",
+    //         "Bank_name": "State Bank Of India"
+    //     },
+    //     nomineeInformation,
+    // }
+
+
+    //console.log('Body Content => ' + body);
+    // axios.post(url, body).then((response) => {
+    //     console.log(response.data);
+    // });
+
+    // }
+
+    // const Continue = () => {
+    //     console.log("Function called!");
+    // }
 
     return (
         <>
@@ -79,25 +147,25 @@ const Body = () => {
                 <form class="row g-3" style={{ marginLeft: '80px', marginRight: '80px' }}>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputFirstName" class="form-label">First Name</label>
-                        <input type="text" pattern="([A-z])+(.?[a-zA-Z])*('?[a-zA-Z])*" onChange={(e) => {
+                        <input type="text" onChange={(e) => {
                             setFirstName(e.target.value);
                         }} class="form-control" id="inputFirstName" />
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputLastname" class="form-label">Last Name</label>
-                        <input type="text" pattern="([A-z])+(.?[a-zA-Z])*('?[a-zA-Z])*" onChange={(e) => {
+                        <input type="text" onChange={(e) => {
                             setLastName(e.target.value);
                         }} class="form-control" id="inputLastname" />
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputEmail4" class="form-label">Email</label>
-                        <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onChange={(e) => {
+                        <input type="email" onChange={(e) => {
                             setEmail(e.target.value);
                         }} class="form-control" id="inputEmail4" />
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputContact" class="form-label">Contact Number</label>
-                        <input type="text" pattern="/^[0-9\b]+$/" onChange={(e) => {
+                        <input type="text" onChange={(e) => {
                             setContactNumber(e.target.value);
                         }} class="form-control" id="inputContact" minLength={10} maxLength={10} />
                     </div>
@@ -112,10 +180,10 @@ const Body = () => {
                         <select id="inputGender" class="form-select" onChange={(e) => {
                             setGender(e.target.value)
                         }}>
-                            <option disabled={true} value="">Select...</option>
-                            <option value ="male">Male</option>
-                            <option value ="female">Female</option>
-                            <option value ="transgender">Transgender</option>
+                            <option selected disabled>Select...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="transgender">Transgender</option>
                         </select>
                     </div>
                     <div class="col-md-4" style={{ textAlign: "left" }}>
@@ -123,7 +191,7 @@ const Body = () => {
                         <select id="inputMarital" class="form-select" onChange={(e) => {
                             setMaritalStatus(e.target.value)
                         }}>
-                            <option disabled>Select...</option>
+                            <option selected disabled>Select...</option>
                             <option value="married">Married</option>
                             <option value="single">Single</option>
                             <option value="divorced">Divorced</option>
@@ -136,7 +204,7 @@ const Body = () => {
                         <select id="inputIdentity" class="form-select" onChange={(e) => {
                             setIdentityType(e.target.value)
                         }}>
-                            <option disabled={true} value="">Select...</option>
+                            <option selected disabled>Select...</option>
                             <option value="aadharId">Aadhaar</option>
                             <option value="pancard">PAN Card</option>
                             <option value="voterId">Voter ID</option>
@@ -148,9 +216,9 @@ const Body = () => {
                             <div>
                                 <div class="col-md-0" style={{ textAlign: "left" }}>
                                     <label for="inputData" class="form-label">Aadhar Number</label>
-                                    <input type="text" pattern="/^[0-9\b]+$/" onChange={(e) => {
+                                    <input type="text" onChange={(e) => {
                                         setIdentityNumber(e.target.value);
-                                    }} class="form-control" id="inputData" minLength={12} maxLength={12}/>
+                                    }} class="form-control" id="inputData" minLength={12} maxLength={12} />
                                 </div>
                             </div>
                         }
@@ -161,7 +229,7 @@ const Body = () => {
                                     <label for="inputData" class="form-label">PAN Number</label>
                                     <input type="text" onChange={(e) => {
                                         setIdentityNumber(e.target.value);
-                                    }} class="form-control" id="inputData" minLength={10} maxLength={10}/>
+                                    }} class="form-control" id="inputData" minLength={10} maxLength={10} />
                                 </div>
                             </div>
                         }
@@ -173,7 +241,7 @@ const Body = () => {
                                     <label for="inputData" class="form-label">Voter Number</label>
                                     <input type="text" onChange={(e) => {
                                         setIdentityNumber(e.target.value);
-                                    }} class="form-control" id="inputData" minLength={10} maxLength={10}/>
+                                    }} class="form-control" id="inputData" minLength={10} maxLength={10} />
                                 </div>
                             </div>
                         }
@@ -197,7 +265,7 @@ const Body = () => {
                         <select id="inputState" class="form-select" onChange={(e) => {
                             setState(e.target.value)
                         }}>
-                            <option disabled>Select...</option>
+                            <option selected disabled>Select...</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                             <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -207,9 +275,6 @@ const Body = () => {
                             <option value="Chhattisgarh">Chhattisgarh</option>
                             <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
                             <option value="Delhi">Delhi</option>
-                            <option value="Lakshadweep">Lakshadweep</option>
-                            <option value="Ladakh">Ladakh</option>
-                            <option value="Puducherry">Puducherry</option>
                             <option value="Goa">Goa</option>
                             <option value="Gujarat">Gujarat</option>
                             <option value="Haryana">Haryana</option>
@@ -218,6 +283,8 @@ const Body = () => {
                             <option value="Jharkhand">Jharkhand</option>
                             <option value="Karnataka">Karnataka</option>
                             <option value="Kerala">Kerala</option>
+                            <option value="Lakshadweep">Lakshadweep</option>
+                            <option value="Ladakh">Ladakh</option>
                             <option value="Madhya Pradesh">Madhya Pradesh</option>
                             <option value="Maharashtra">Maharashtra</option>
                             <option value="Manipur">Manipur</option>
@@ -225,6 +292,7 @@ const Body = () => {
                             <option value="Mizoram">Mizoram</option>
                             <option value="Nagaland">Nagaland</option>
                             <option value="Odisha">Odisha</option>
+                            <option value="Puducherry">Puducherry</option>
                             <option value="Punjab">Punjab</option>
                             <option value="Rajasthan">Rajasthan</option>
                             <option value="Sikkim">Sikkim</option>
@@ -238,7 +306,7 @@ const Body = () => {
                     </div>
                     <div class="col-md-2" style={{ textAlign: "left" }}>
                         <label for="inputPincode" class="form-label">Pincode</label>
-                        <input type="text" pattern="/^[0-9\b]+$/" onChange={(e) => {
+                        <input type="text" onChange={(e) => {
                             setPincode(e.target.value);
                         }} class="form-control" id="inputPincode" minLength={6} maxLength={6} />
                     </div>
@@ -252,9 +320,9 @@ const Body = () => {
                             setIdentityNumber(e.target.value);
                         }} class="form-control" id="inputData" />
                     </div> */}
-                
+
                     <h4 className="text-success">Nominee Information</h4>
-                <hr></hr>
+                    <hr></hr>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputNominee" class="form-label">Nominee Name</label>
                         <input type="text" onChange={(e) => {
@@ -266,7 +334,7 @@ const Body = () => {
                         <select id="inputRelation" class="form-select" onChange={(e) => {
                             setNomineeRelation(e.target.value)
                         }}>
-                            <option disabled={true} value="">Select...</option>
+                            <option selected disabled>Select...</option>
                             {maritalStatus == "single" &&
                                 <option hidden>Spouse</option>
                             }
@@ -281,11 +349,11 @@ const Body = () => {
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputNominee" class="form-label">Nominee Date Of Birth</label>
-                        <input type="text" onChange={(e) => {
+                        <input type="date" onChange={(e) => {
                             setNomineeDOB(e.target.value);
                         }} class="form-control" id="inputNominee" />
                     </div>
-                    
+
                     {/* <div class="col-12" style={{textAlign: "left"}}>
                         <label for="inputAddress2" class="form-label">Address 2</label>
                         <input type="text" onChange={(e) => {
@@ -293,7 +361,7 @@ const Body = () => {
                         }} class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
                     </div> */}
                     <div class="col-12" style={{ textAlign: "right" }}>
-                        <button type="submit" onClick={clicked()} class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" onClick={clickFunc}>Submit</button>
                     </div>
                 </form>
                 <br />
