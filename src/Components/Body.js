@@ -25,9 +25,62 @@ const Body = () => {
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
+    const [aadharId, setAadharId] = useState("")
     const [pincode, setPincode] = useState("")
 
+    const [firstNameErr, setFirstNameErr] = useState("")
+    const [lastNameErr, setLastNameErr] = useState("")
+    const [emailErr, setEmailErr] = useState("")
+    const [contactNumberErr ,setContactNumberErr] = useState("")
+    const [aadharIdErr, setAadharIdErr] = useState("")
+    const [pincodeErr, setPincodeErr] = useState("")
+
+    const validation = () => {
+        let flag = true;
+        if(firstName != "([A-z])+(.?[a-zA-Z])('?[a-zA-Z])"){
+            setFirstNameErr("Please enter requested format!");
+            flag = false;
+        }
+        if(lastName != "([A-z])+(.?[a-zA-Z])('?[a-zA-Z])"){
+            setLastNameErr("Please enter requested format!");
+            flag = false;
+        }
+        if(email != "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"){
+            setEmailErr("Please enter requested format!");
+            flag = false;
+        }
+        if(contactNumber != "/^[0-9\b]+$/"){
+            setContactNumberErr("Please enter requested format!");
+            flag = false;
+        }
+        // console.log("In aadhar id :: " + aadharId);
+        if(aadharId != "/^[0-9\b]+$/"){
+            // console.log("Insdie aadhar id if condiri==tion");
+            setAadharIdErr("Please enter valid number!");
+            flag = false;
+        }
+        // console.log("In pincode :: " + pincode);
+        if(pincode != "/^[0-9\b]+$/"){
+            // console.log("Inside pincode if condition");
+            setPincodeErr("Please enter valid number!");
+            flag = false;
+        }
+        if(flag){
+            return true;
+        }
+    }
+
     const clickFunc = () => {
+
+        if(validation()){
+            // if((firstName >= 'A' && firstName <= 'Z') || (firstName >='a' && firstName <= 'z')){
+            //     setFirstNameErr("Please enter valid name");
+            // }
+          setFirstNameErr("");
+          setLastNameErr("");
+          setEmailErr(""); 
+          
+        }
         alert("Inside Clicked")
         const nomineeInformation = {
             nomineeName,
@@ -150,24 +203,28 @@ const Body = () => {
                         <input type="text" onChange={(e) => {
                             setFirstName(e.target.value);
                         }} class="form-control" id="inputFirstName" />
+                        <span className="text-danger">{firstNameErr}</span>
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputLastname" class="form-label">Last Name</label>
                         <input type="text" onChange={(e) => {
                             setLastName(e.target.value);
                         }} class="form-control" id="inputLastname" />
+                        <span className="text-danger">{lastNameErr}</span>
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputEmail4" class="form-label">Email</label>
                         <input type="email" onChange={(e) => {
                             setEmail(e.target.value);
                         }} class="form-control" id="inputEmail4" />
+                        <span className="text-danger">{emailErr}</span>
                     </div>
                     <div class="col-md-6" style={{ textAlign: "left" }}>
                         <label for="inputContact" class="form-label">Contact Number</label>
                         <input type="text" onChange={(e) => {
                             setContactNumber(e.target.value);
                         }} class="form-control" id="inputContact" minLength={10} maxLength={10} />
+                        <span className="text-danger">{contactNumberErr}</span>
                     </div>
                     <div class="col-md-4" style={{ textAlign: "left" }}>
                         <label for="inputDOB" class="form-label">Date Of Birth</label>
@@ -219,6 +276,7 @@ const Body = () => {
                                     <input type="text" onChange={(e) => {
                                         setIdentityNumber(e.target.value);
                                     }} class="form-control" id="inputData" minLength={12} maxLength={12} />
+                                    <span className="text-danger">{aadharIdErr}</span>
                                 </div>
                             </div>
                         }
@@ -261,7 +319,7 @@ const Body = () => {
                         }} class="form-control" id="inputCity" />
                     </div>
                     <div class="col-md-4" style={{ textAlign: "left" }}>
-                        <label for="inputState" class="form-label">State</label>
+                        <label for="inputState" class="form-label">State & UTs</label>
                         <select id="inputState" class="form-select" onChange={(e) => {
                             setState(e.target.value)
                         }}>
@@ -309,6 +367,7 @@ const Body = () => {
                         <input type="text" onChange={(e) => {
                             setPincode(e.target.value);
                         }} class="form-control" id="inputPincode" minLength={6} maxLength={6} />
+                        <span className="text-danger">{pincodeErr}</span>
                     </div>
                     <div class="col-12" style={{ textAlign: "left" }}>
                     </div>
