@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const styles = {
   title: {
     fontFamily: "Courier New",
-    fontSize: "1.1em",
+    fontSize: "1.2em",
     fontWeight: "bold",
     color: "white",
     marginLeft: "25px",
@@ -58,7 +58,7 @@ const Header = () => {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
               <a href="/" class="nav-item nav-link active" style={styles.title}>
-                <i>Medical Insurance</i>
+                <i><u>Medical Insurance</u></i>
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
                 Home
