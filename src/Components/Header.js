@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const styles = {
   title: {
     fontFamily: "Courier New",
-    fontSize: "1.2em",
+    fontSize: "1.8em",
     fontWeight: "bold",
     color: "white",
-    marginLeft: "25px",
+    marginLeft: "330px",
     marginRight: "30px",
     padding: "0",
   },
@@ -58,9 +58,9 @@ const Header = () => {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
               <a href="/" class="nav-item nav-link active" style={styles.title}>
-                <i><u>Medical Insurance</u></i>
+                Medical Insurance Registration Form
               </a>
-              <a href="/" class="nav-item nav-link" style={styles.title}>
+              {/* <a href="/" class="nav-item nav-link" style={styles.title}>
                 Home
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
@@ -68,7 +68,7 @@ const Header = () => {
               </a>
               <a href="/" class="nav-item nav-link" style={styles.title}>
                 Contact Us
-              </a>
+              </a> */}
             </div>
             <div class="navbar-nav ms-auto">
               {/* <a href="/" style={styles.login} class="nav-item nav-link">

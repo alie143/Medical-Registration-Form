@@ -1,3 +1,3 @@
-const URL = `http://10.210.8.54:3002/api/clientregistration`
+const URL = `http://10.210.12.30:3002/api/clientregistration`
 
 export default URL;
